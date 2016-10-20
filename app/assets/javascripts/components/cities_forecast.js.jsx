@@ -9,25 +9,47 @@ var CitiesForecast = React.createClass({
     return { tempMin: '', tempMax: ''}
   },
 
-  componentDidMount() {
-    var that= this;
-
-    url= "http://api.openweathermap.org/data/2.5/weather?q="+this.props.cityName+","+this.props.countryName+"&APPID=4d1acb469df57c5a142a6040c242d91f",
+  getWheather: function(){
+    that = this;
+    url= "http://api.openweathermap.org/data/2.5/weather?q="+that.props.cityName+","+that.props.countryName+"&APPID=4d1acb469df57c5a142a6040c242d91f",
 
     fetch(url) 
         .then(result=> {
             result.json().then(function(data) {  
               // console.log(data);  
-              // that.setState({tempMin:data.main.temp_min});
-              // that.setState({tempMax:data.main.temp_max});
+              that.setState({tempMin:data.main.temp_min});
+              that.setState({tempMax:data.main.temp_max});
 
-              console.log("openwheather result = ", data);
+              // console.log("openwheather result = ", data);
             }); 
 
         })
         .catch(function(err) {  
           console.log('Fetch Error :-S', err);  
         });
+
+
+  },
+
+  componentDidMount() {
+    var that= this;
+    // that.getWheather();
+    // url= "http://api.openweathermap.org/data/2.5/weather?q="+this.props.cityName+","+this.props.countryName+"&APPID=4d1acb469df57c5a142a6040c242d91f",
+
+    // fetch(url) 
+    //     .then(result=> {
+    //         result.json().then(function(data) {  
+    //           // console.log(data);  
+    //           // that.setState({tempMin:data.main.temp_min});
+    //           // that.setState({tempMax:data.main.temp_max});
+
+    //           console.log("openwheather result = ", data);
+    //         }); 
+
+    //     })
+    //     .catch(function(err) {  
+    //       console.log('Fetch Error :-S', err);  
+    //     });
 
 
     dburl= "http://localhost:3000/city/wheather?city_id="+this.props.cityId,
@@ -43,12 +65,29 @@ var CitiesForecast = React.createClass({
 
                 that.setState({tempMin:data.temp_min});
                 that.setState({tempMax:data.temp_max});
-                }
-              // }else{
-              //   // that.setState({tempMin:0});
-              //   // that.setState({tempMax:0});
+                
+              }else{
+                console.log("SE LLAMA A GETWHEATHER ", data);
 
-              // }
+                that.getWheather();
+
+                // url= "http://api.openweathermap.org/data/2.5/weather?q="+that.props.cityName+","+that.props.countryName+"&APPID=4d1acb469df57c5a142a6040c242d91f",
+
+                // fetch(url) 
+                //     .then(result=> {
+                //         result.json().then(function(data) {  
+                //           // console.log(data);  
+                //           that.setState({tempMin:data.main.temp_min});
+                //           that.setState({tempMax:data.main.temp_max});
+
+                //           // console.log("openwheather result = ", data);
+                //         }); 
+
+                //     })
+                //     .catch(function(err) {  
+                //       console.log('Fetch Error :-S', err);  
+                //     });
+              }
 
             }); 
 
