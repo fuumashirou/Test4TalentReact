@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   # get 'home/index'
    root "home#index"
 
+   # get  'enterprise/:enterprise_id/scales', to:'enterprise#get_scales'
+   get  'city/wheather', to:'home#get_city_wheather'   
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

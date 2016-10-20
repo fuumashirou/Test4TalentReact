@@ -1,22 +1,69 @@
 var CitiesForecast = React.createClass({
   propTypes: {
     cityName: React.PropTypes.string,
-    countryName: React.PropTypes.string
+    countryName: React.PropTypes.string,
+    cityId: React.PropTypes.number
   },
+
+  // setWheather(){
+  //   var that= this;
+  //   url= "localhost:3000/city/wheather?city="+this.props.cityName+"&country"+this.props.countryName+"&APPID=4d1acb469df57c5a142a6040c242d91f",
+
+  //   fetch(url) 
+  //       .then(result=> {
+  //           result.json().then(function(data) {  
+  //             // console.log(data);  
+  //             // that.setState({tempMin:data.main.temp_min});
+  //             // that.setState({tempMax:data.main.temp_max});
+
+  //             console.log("result = ", data);
+  //           }); 
+
+  //       })
+  //       .catch(function(err) {  
+  //         console.log('Fetch Error :-S', err);  
+  //       });
+  // },
 
 
   componentDidMount() {
     var that= this;
+
+    // that.setWheather();
     url= "http://api.openweathermap.org/data/2.5/weather?q="+this.props.cityName+","+this.props.countryName+"&APPID=4d1acb469df57c5a142a6040c242d91f",
 
     fetch(url) 
         .then(result=> {
             result.json().then(function(data) {  
               // console.log(data);  
-              that.setState({tempMin:data.main.temp_min});
-              that.setState({tempMax:data.main.temp_max});
+              // that.setState({tempMin:data.main.temp_min});
+              // that.setState({tempMax:data.main.temp_max});
 
-              console.log("result = ", data);
+              console.log("openwheather result = ", data);
+            }); 
+
+        })
+        .catch(function(err) {  
+          console.log('Fetch Error :-S', err);  
+        });
+
+
+    dburl= "http://localhost:3000/city/wheather?city_id="+this.props.cityId,
+
+    fetch(dburl) 
+        .then(result=> {
+            result.json().then(function(data) {
+              console.log("bd data= ", data);
+              
+              if(data != undefined && data != null){
+                console.log("bd temp_min = ", data.temp_min);
+                console.log("bd temp_max = ", data.temp_max);
+
+                that.setState({tempMin:data.main.temp_min});
+                that.setState({tempMax:data.main.temp_max});
+                
+              }
+
             }); 
 
         })
@@ -31,6 +78,7 @@ var CitiesForecast = React.createClass({
   render: function() {
     return (
       <div>
+        <div>City Id: {this.props.cityId}</div>
         <div>City Name: {this.props.cityName}</div>
         <div>Country Name: {this.props.countryName}</div>
         <div>Temp Min: {this.state.tempMin}</div>

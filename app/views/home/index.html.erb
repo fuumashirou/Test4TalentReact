@@ -5,7 +5,8 @@
 
 <% @cities.each do |city| %>
 
-	<%= react_component('CitiesForecast', {cityName: city.name, countryName: city.country}) %>
-	<%= city.forecasts.last[:temp_min]  %>
+	<%= react_component('CitiesForecast', {cityId: city.id, cityName: city.name, countryName: city.country}) %>
+
+	<%#= city.forecasts.last[:temp_min]  %>
 <% end %>
 
