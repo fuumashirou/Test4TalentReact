@@ -19,6 +19,9 @@ var CitiesForecast = React.createClass({
               console.log("result = ", data);
             }); 
 
+        })
+        .catch(function(err) {  
+          console.log('Fetch Error :-S', err);  
         });
   },
   getInitialState: function(){
