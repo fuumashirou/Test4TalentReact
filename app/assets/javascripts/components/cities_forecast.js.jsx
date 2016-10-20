@@ -8,6 +8,11 @@ var CitiesForecast = React.createClass({
   getInitialState: function(){
     return { tempMin: '', tempMax: ''}
   },
+  handleClick: function(e){
+    that = this;
+    that.getWheather();
+
+  },
 
   getWheather: function(){
     that = this;
@@ -15,12 +20,11 @@ var CitiesForecast = React.createClass({
 
     fetch(url) 
         .then(result=> {
-            result.json().then(function(data) {  
-              // console.log(data);  
+            result.json().then(function(data) { 
               that.setState({tempMin:data.main.temp_min});
               that.setState({tempMax:data.main.temp_max});
+              console.log("--- getWheather data = ", data);
               that.saveWheather();
-              // console.log("openwheather result = ", data);
             }); 
 
         })
@@ -34,19 +38,19 @@ var CitiesForecast = React.createClass({
     that = this;
     dburl= "http://localhost:3000/city/wheather";
     fetch(dburl, {  
-    method: 'post',  
-    headers: {  
-      "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"  
-    },  
-    body: 'city_id='+that.props.cityId+'&temp_min='+that.state.tempMin+'&temp_max='+that.state.tempMax
-    })
+      method: 'post',  
+      headers: {  
+        "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"  
+      },  
+      body: 'city_id='+that.props.cityId+'&temp_min='+that.state.tempMin+'&temp_max='+that.state.tempMax
+      })
     // .then(json)  
-    .then(function (data) {  
-      console.log('Request succeeded with JSON response', data);  
-    })  
-    .catch(function (error) {  
-      console.log('Request failed', error);  
-    });
+      .then(function (data) {  
+        console.log('Request succeeded with JSON response', data);  
+      })  
+      .catch(function (error) {  
+        console.log('Request failed', error);  
+      });
 
   },
 
@@ -58,20 +62,15 @@ var CitiesForecast = React.createClass({
     fetch(dburl) 
         .then(result=> {
             result.json().then(function(data) {
-              console.log("bd data= ", data);
+              // console.log("bd data= ", data);
               
               if(data != undefined && data != null){
-                // console.log("bd temp_min = ", data.temp_min);
-                // console.log("bd temp_max = ", data.temp_max);
 
                 that.setState({tempMin:data.temp_min});
                 that.setState({tempMax:data.temp_max});
-                
               }else{
-                // console.log("SE LLAMA A GETWHEATHER ", data);
 
                 that.getWheather();
-                
 
               }
 
@@ -91,17 +90,11 @@ var CitiesForecast = React.createClass({
         <div>Country Name: {this.props.countryName}</div>
         <div>Temp Min: {this.state.tempMin}</div>
         <div>Temp Max: {this.state.tempMax}</div>
+
+        <input type="button" onClick={this.handleClick} value="Click Me!" />
       </div>
     );
-    // return (
-    //   <div>
-    //     <div>City Name: {this.props.cityName}</div>
-    //     <div>Country Name: {this.props.countryName}</div>
-    //     <div>Temp Min: {this.props.tempMin}</div>
-    //     <div>Temp Max: {this.props.tempMax}</div>
- 
-    //   </div>
-    // );
+
   },
 
 
