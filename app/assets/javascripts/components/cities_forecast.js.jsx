@@ -5,31 +5,13 @@ var CitiesForecast = React.createClass({
     cityId: React.PropTypes.number
   },
 
-  // setWheather(){
-  //   var that= this;
-  //   url= "localhost:3000/city/wheather?city="+this.props.cityName+"&country"+this.props.countryName+"&APPID=4d1acb469df57c5a142a6040c242d91f",
-
-  //   fetch(url) 
-  //       .then(result=> {
-  //           result.json().then(function(data) {  
-  //             // console.log(data);  
-  //             // that.setState({tempMin:data.main.temp_min});
-  //             // that.setState({tempMax:data.main.temp_max});
-
-  //             console.log("result = ", data);
-  //           }); 
-
-  //       })
-  //       .catch(function(err) {  
-  //         console.log('Fetch Error :-S', err);  
-  //       });
-  // },
-
+  getInitialState: function(){
+    return { tempMin: '', tempMax: ''}
+  },
 
   componentDidMount() {
     var that= this;
 
-    // that.setWheather();
     url= "http://api.openweathermap.org/data/2.5/weather?q="+this.props.cityName+","+this.props.countryName+"&APPID=4d1acb469df57c5a142a6040c242d91f",
 
     fetch(url) 
@@ -59,10 +41,14 @@ var CitiesForecast = React.createClass({
                 console.log("bd temp_min = ", data.temp_min);
                 console.log("bd temp_max = ", data.temp_max);
 
-                that.setState({tempMin:data.main.temp_min});
-                that.setState({tempMax:data.main.temp_max});
-                
-              }
+                that.setState({tempMin:data.temp_min});
+                that.setState({tempMax:data.temp_max});
+                }
+              // }else{
+              //   // that.setState({tempMin:0});
+              //   // that.setState({tempMax:0});
+
+              // }
 
             }); 
 
@@ -71,9 +57,52 @@ var CitiesForecast = React.createClass({
           console.log('Fetch Error :-S', err);  
         });
   },
-  getInitialState: function(){
-    return { tempMin: '', tempMax: ''}
-  },
+  // componentDidMount() {
+  //   var that= this;
+
+  //   dburl= "http://localhost:3000/city/wheather?city_id="+this.props.cityId,
+
+  //   fetch(dburl) 
+  //       .then(result=> {
+  //           result.json().then(function(data) {
+  //             console.log("bd data= ", data);
+              
+  //             if(data != undefined && data != null){
+  //               console.log("bd temp_min = ", data.temp_min);
+  //               console.log("bd temp_max = ", data.temp_max);
+
+  //               that.setState({tempMin:data.main.temp_min});
+  //               that.setState({tempMax:data.main.temp_max});
+                
+  //             }else{
+  //                url= "http://api.openweathermap.org/data/2.5/weather?q="+this.props.cityName+","+this.props.countryName+"&APPID=4d1acb469df57c5a142a6040c242d91f",
+
+  //               fetch(url) 
+  //                   .then(result=> {
+  //                       result.json().then(function(data) {  
+  //                         // console.log(data);  
+  //                         // that.setState({tempMin:data.main.temp_min});
+  //                         // that.setState({tempMax:data.main.temp_max});
+
+  //                         console.log("openwheather result = ", data);
+  //                       }); 
+
+  //                   })
+  //                   .catch(function(err) {  
+  //                     console.log('Fetch Error :-S', err);  
+  //                   });
+
+  //             }
+
+  //           }); 
+
+  //       })
+  //       .catch(function(err) {  
+  //         console.log('Fetch Error :-S', err);  
+  //       });
+
+
+  // },
 
   render: function() {
     return (
