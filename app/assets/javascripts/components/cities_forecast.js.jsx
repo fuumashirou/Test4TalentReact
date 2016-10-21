@@ -66,7 +66,7 @@ var CitiesForecast = React.createClass({
             result.json().then(function(data) {
               console.log("bd data= ", data);
               
-              if(data != undefined && data != null){
+              if(data != undefined || data != null){
 
                 that.setState({tempMin:data.temp_min});
                 that.setState({tempMax:data.temp_max});
@@ -75,7 +75,6 @@ var CitiesForecast = React.createClass({
               }else{
 
                 that.getWeather();
-
               }
 
             }); 
@@ -94,7 +93,7 @@ var CitiesForecast = React.createClass({
         <div>Min ↓ : {this.state.tempMin}° C</div>
         <div>Max ↑ : {this.state.tempMax}° C</div>
 
-        <input type="button" onClick={this.handleClick} value="Actualizar" />
+        <input type="button" onClick={this.handleClick} value="Actualizar" className="btn btn-primary" />
       </div>
     );
 
