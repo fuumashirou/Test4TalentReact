@@ -6,29 +6,14 @@
 </div>
 <div class="row">
 	<div class="col-md-12">
-		<div class="row">
-			<div class="col-md-offset-3 col-md-6 border-select">
-				
-				<%= collection_select(:City, :city_id, City.all, :id, :name, prompt: false) %>
 
-			</div>
-			<div class="col-md-offset-3 col-md-6 border" >
-				<%= react_component('CitiesForecast', {cityId: @city.id, cityName: @city.name, countryName: @city.country, hostURL: @hostURL}) %>
-			</div>
-	
-		</div>
-		<!-- <div class="row">
-			<%# @cities.each do |city| %>
-				<%# if city.id == 1 %>
-					<div class="col-md-offset-3 col-md-6 border-select">
-						<%#= select("post", "city_id", City.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }) %>
-					</div>
+		<div class="row spacing-top">
+			<% @cities.each do |city| %>
 					<div class="col-md-offset-3 col-md-6 border" >
-						<%#= react_component('CitiesForecast', {cityId: city.id, cityName: city.name, countryName: city.country, hostURL: @hostURL}) %>
+						<%= react_component('CitiesForecast', {cityId: city.id, cityName: city.name, countryName: city.country, hostURL: @hostURL}) %>
 					</div>
-				<%# end %>
-			<%# end %>
-		</div> -->
+			<% end %>
+		</div>
 
 	</div>
 </div>
