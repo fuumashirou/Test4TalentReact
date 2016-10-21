@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161021051529) do
+ActiveRecord::Schema.define(version: 20161021153156) do
 
   create_table "cities", force: :cascade do |t|
     t.string   "name"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20161021051529) do
     t.datetime "updated_at",   null: false
     t.float    "current_temp"
     t.string   "description"
+    t.string   "icon"
   end
 
   add_index "forecasts", ["city_id"], name: "index_forecasts_on_city_id"

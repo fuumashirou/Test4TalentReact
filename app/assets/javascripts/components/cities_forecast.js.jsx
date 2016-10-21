@@ -7,7 +7,7 @@ var CitiesForecast = React.createClass({
   },
 
   getInitialState: function(){
-    return { tempMin: '', tempMax: '', tempCurrent: ''}
+    return { tempMin: '', tempMax: '', tempCurrent: '', description: '', icon:''}
   },
   handleClick: function(e){
     that = this;
@@ -26,7 +26,8 @@ var CitiesForecast = React.createClass({
               that.setState({tempMin:data.main.temp_min});
               that.setState({tempMax:data.main.temp_max});
               that.setState({tempCurrent:data.main.temp});
-              // that.setState({tempMax:data.weather.description});
+              that.setState({description:data.weather[0].description});
+              that.setState({icon:"/assets/weather-icons/"+data.weather[0].icon+".png"});
               that.saveWeather();
             }); 
 
@@ -46,7 +47,7 @@ var CitiesForecast = React.createClass({
       headers: {  
         "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"  
       },  
-      body: 'city_id='+that.props.cityId+'&temp_min='+that.state.tempMin+'&temp_max='+that.state.tempMax+'&temp_current='+that.state.tempCurrent
+      body: 'city_id='+that.props.cityId+'&temp_min='+that.state.tempMin+'&temp_max='+that.state.tempMax+'&temp_current='+that.state.tempCurrent+'&description='+that.state.description+'&icon='+that.state.icon
       })
     // .then(json)  
       .then(function (data) {  
@@ -73,6 +74,9 @@ var CitiesForecast = React.createClass({
                 that.setState({tempMin:data.temp_min});
                 that.setState({tempMax:data.temp_max});
                 that.setState({tempCurrent:data.current_temp});
+                that.setState({description:data.description});
+                that.setState({icon:data.icon});
+
                 // that.setState({tempMax:data.description});
               }else{
 
@@ -87,7 +91,10 @@ var CitiesForecast = React.createClass({
                           that.setState({tempMin:data.main.temp_min});
                           that.setState({tempMax:data.main.temp_max});
                           that.setState({tempCurrent:data.main.temp});
-                
+                          that.setState({description:data.weather[0].description});
+                          that.setState({icon:"/assets/weather-icons/"+data.weather[0].icon+".png"});
+                          
+                          
 
                           // that.setState({tempMax:data.weather.description});
                           
@@ -98,7 +105,7 @@ var CitiesForecast = React.createClass({
                             headers: {  
                               "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"  
                             },  
-                            body: 'city_id='+that.props.cityId+'&temp_min='+that.state.tempMin+'&temp_max='+that.state.tempMax+'&temp_current='+that.state.tempCurrent
+                            body: 'city_id='+that.props.cityId+'&temp_min='+that.state.tempMin+'&temp_max='+that.state.tempMax+'&temp_current='+that.state.tempCurrent+'&description='+that.state.description+'&icon='+that.state.icon
                             })
                           // .then(json)  
                             .then(function (data) {  
@@ -130,6 +137,8 @@ var CitiesForecast = React.createClass({
       <div>
         <div className="subtitle">{this.props.cityName}, {this.props.countryName}</div>
         <div className="subtitle2"> {this.state.tempCurrent}° C</div>
+        <img src={this.state.icon} width="150" height="150" />
+        <div className="subtitle3"> {this.state.description}</div>
         <div>Min ↓ : {this.state.tempMin}° C</div>
         <div>Max ↑ : {this.state.tempMax}° C</div>
         <input type="button" onClick={this.handleClick} value="Actualizar" className="spacing-top btn btn-primary" />
