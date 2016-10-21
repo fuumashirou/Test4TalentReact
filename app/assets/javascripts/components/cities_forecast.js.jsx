@@ -90,12 +90,12 @@ var CitiesForecast = React.createClass({
   render: function() {
     return (
       <div>
-        <div>{this.props.cityName}, {this.props.countryName}</div>
-        <div> {this.state.tempCurrent}° C</div>
+        <div className="subtitle">{this.props.cityName}, {this.props.countryName}</div>
+        <div className="subtitle2"> {this.state.tempCurrent}° C</div>
         <div>Min ↓ : {this.state.tempMin}° C</div>
         <div>Max ↑ : {this.state.tempMax}° C</div>
 
-        <input type="button" onClick={this.handleClick} value="Actualizar" className="btn btn-primary" />
+        <input type="button" onClick={this.handleClick} value="Actualizar" className="spacing btn btn-primary" />
       </div>
     );
 

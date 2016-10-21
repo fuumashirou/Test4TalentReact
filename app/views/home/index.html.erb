@@ -9,8 +9,8 @@
 		<div class="row">
 			<div class="col-md-offset-3 col-md-6 border-select">
 				
-						<%= select("post", "city_id", City.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }) %>
-						<%#= collection_select :city_id, City.all, :id, :name %>
+				<%= collection_select(:City, :city_id, City.all, :id, :name, prompt: false) %>
+
 			</div>
 			<div class="col-md-offset-3 col-md-6 border" >
 				<%= react_component('CitiesForecast', {cityId: @city.id, cityName: @city.name, countryName: @city.country, hostURL: @hostURL}) %>
