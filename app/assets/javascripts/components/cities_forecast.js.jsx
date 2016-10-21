@@ -2,7 +2,8 @@ var CitiesForecast = React.createClass({
   propTypes: {
     cityName: React.PropTypes.string,
     countryName: React.PropTypes.string,
-    cityId: React.PropTypes.number
+    cityId: React.PropTypes.number,
+    hostURL: React.PropTypes.string
   },
 
   getInitialState: function(){
@@ -38,7 +39,8 @@ var CitiesForecast = React.createClass({
   },
   saveWeather: function(){
     that = this;
-    dburl= "http://localhost:3000/city/wheather";
+    dburl= that.props.hostURL+"city/weather";
+
     fetch(dburl, {  
       method: 'post',  
       headers: {  
@@ -59,14 +61,14 @@ var CitiesForecast = React.createClass({
   componentDidMount() {
     var that= this;
 
-    dburl= "http://localhost:3000/city/wheather?city_id="+this.props.cityId;
+    dburl= that.props.hostURL+"city/weather?city_id="+this.props.cityId;
 
     fetch(dburl) 
         .then(result=> {
             result.json().then(function(data) {
               console.log("bd data= ", data);
               
-              if(data != undefined || data != null){
+              if(data != null){
 
                 that.setState({tempMin:data.temp_min});
                 that.setState({tempMax:data.temp_max});

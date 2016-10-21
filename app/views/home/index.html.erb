@@ -7,13 +7,28 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="row">
-			<% @cities.each do |city| %>
-				<div class="col-md-6 border" >
-					<%= react_component('CitiesForecast', {cityId: city.id, cityName: city.name, countryName: city.country}) %>
-				</div>
+			<div class="col-md-offset-3 col-md-6 border-select">
+				
+						<%= select("post", "city_id", City.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }) %>
+						<%#= collection_select :city_id, City.all, :id, :name %>
+			</div>
+			<div class="col-md-offset-3 col-md-6 border" >
+				<%= react_component('CitiesForecast', {cityId: @city.id, cityName: @city.name, countryName: @city.country, hostURL: @hostURL}) %>
+			</div>
 	
-			<% end %>
 		</div>
+		<!-- <div class="row">
+			<%# @cities.each do |city| %>
+				<%# if city.id == 1 %>
+					<div class="col-md-offset-3 col-md-6 border-select">
+						<%#= select("post", "city_id", City.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }) %>
+					</div>
+					<div class="col-md-offset-3 col-md-6 border" >
+						<%#= react_component('CitiesForecast', {cityId: city.id, cityName: city.name, countryName: city.country, hostURL: @hostURL}) %>
+					</div>
+				<%# end %>
+			<%# end %>
+		</div> -->
 
 	</div>
 </div>
