@@ -77,6 +77,7 @@ var CitiesForecast = React.createClass({
                 that.setState({description:data.description});
                 that.setState({icon:data.icon});
 
+
                 // that.setState({tempMax:data.description});
               }else{
 
