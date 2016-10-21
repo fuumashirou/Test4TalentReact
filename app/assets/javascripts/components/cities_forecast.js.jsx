@@ -16,7 +16,7 @@ var CitiesForecast = React.createClass({
 
   getWheather: function(){
     that = this;
-    url= "http://api.openweathermap.org/data/2.5/weather?q="+that.props.cityName+","+that.props.countryName+"&APPID=4d1acb469df57c5a142a6040c242d91f";
+    url= "http://api.openweathermap.org/data/2.5/weather?q="+that.props.cityName+","+that.props.countryName+"&APPID=4d1acb469df57c5a142a6040c242d91f&units=metric";
 
     fetch(url) 
         .then(result=> {
@@ -85,13 +85,11 @@ var CitiesForecast = React.createClass({
   render: function() {
     return (
       <div>
-        <div>City Id: {this.props.cityId}</div>
-        <div>City Name: {this.props.cityName}</div>
-        <div>Country Name: {this.props.countryName}</div>
-        <div>Temp Min: {this.state.tempMin}</div>
-        <div>Temp Max: {this.state.tempMax}</div>
+        <div>{this.props.cityName}, {this.props.countryName}</div>
+        <div>Min ↓ : {this.state.tempMin}° C</div>
+        <div>Max ↑ : {this.state.tempMax}° C</div>
 
-        <input type="button" onClick={this.handleClick} value="Click Me!" />
+        <input type="button" onClick={this.handleClick} value="Actualizar" />
       </div>
     );
 

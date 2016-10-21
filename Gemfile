@@ -31,6 +31,7 @@ gem 'open-weather', require: 'open_weather'
 
 
 # bootstrap
+gem "therubyracer"
 gem 'twitter-bootstrap-rails'
 
 # Use ActiveModel has_secure_password

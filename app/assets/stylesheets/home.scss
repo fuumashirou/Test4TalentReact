@@ -1,3 +1,59 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+h1 {
+	margin: 0;
+	padding: 0;
+}
+
+.title{
+	background: darkturquoise;
+	text-align:center;
+	padding: 20px 0px;
+	letter-spacing: 1px;
+	font-weight: 600;
+}
+
+.border{
+	border-bottom: 1px solid #C5C0C0;
+  border-right: 1px solid #c5c0c0;
+  border-left: 1px solid #c5c0c0;
+  border-top: 1px solid #c5c0c0;
+  text-align: center; 
+  margin-bottom: 20px;
+  padding-top: 30px;
+  padding-bottom: 40px;
+
+  input{
+  	color: #fff;
+    background-color: #428bca;
+    border-color: #357ebd;
+
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  input:hover{
+  	color: #fff;
+    background-color: #3071a9;
+    border-color: #285e8e;
+    text-decoration: none;
+  }
+}
